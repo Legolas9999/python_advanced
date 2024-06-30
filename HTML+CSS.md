@@ -310,23 +310,12 @@ border-collapse 设置表格的边线合并，如：border-collapse:collapse;
 
 # css 的介绍
 
-**学习目标**
 
-- 能够知道css的作用
-
-------
 
 ### 1. css 的定义
 
-> css(Cascading Style Sheet)层叠样式表，它是用来美化页面的一种语言。
+> css(Cascading Style Sheet)层叠样式表，它是用来`美化页面`的一种语言。
 
-**没有使用css的效果图**
-
-![image-20210405000935116](media/image-20210405000935116.png)
-
-**使用css的效果图**
-
-![image-20210405000951710](media/image-20210405000951710.png)
 
 ### 2. css 的作用
 
@@ -374,11 +363,6 @@ css 是由两个主要的部分构成：**选择器和一条或多条样式规�
 
 # css 的引入方式
 
-**学习目标**
-
-- 能够知道 css 的引入三种方式
-
-------
 
 **css的三种引入方式**
 
@@ -483,7 +467,7 @@ css 选择器是用来选择标签的，选出来以后给标签加样式。
 
 **示例代码**
 
-```
+```html
 <style type="text/css">
     .blue{color:blue}
     .big{font-size:20px}
@@ -501,7 +485,7 @@ css 选择器是用来选择标签的，选出来以后给标签加样式。
 
 **示例代码**
 
-```
+```html
 <style type="text/css">
     div p{
         color: red;
@@ -533,7 +517,7 @@ css 选择器是用来选择标签的，选出来以后给标签加样式。
 
 **示例代码**
 
-```
+```html
 <style type="text/css">
     #box{color:red} 
 </style>
@@ -551,7 +535,7 @@ css 选择器是用来选择标签的，选出来以后给标签加样式。
 
 **示例代码**
 
-```
+```html
 <style type="text/css">
 	/* 定义公共属性 */
     .box1,.box2,.box3{width:100px;height:100px}
@@ -572,10 +556,10 @@ css 选择器是用来选择标签的，选出来以后给标签加样式。
 
 **示例代码**
 
-```
+```html
 <style type="text/css">
     .box1{width:100px;height:100px;background:gold;}
-    .box1:hover{width:300px;}
+    .box1:hover{width:300px;} /*鼠标悬停效果*/
 </style>
 
 <div class="box1">这是第一个div</div>
