@@ -232,7 +232,7 @@ socket.socket(AddressFamily, Type)
 
 ![image-20210113234049095](https://github.com/Legolas9999/PicUpload/assets/71768998/2b9a97bb-9633-4523-b488-00d79a11c513)
 
-### ☆ TCP客户端程序开发实践
+### ☆ TCP客户端程序开发实践 (C端:Client)
 
 ```python
 import socket
@@ -252,7 +252,7 @@ if __name__ == '__main__':
 ```
 
 
-## 3、TCP服务器端开发流程及应用实践（七步走）
+## 3、TCP服务器端开发流程及应用实践（七步走）（S端:Server）
 
 ### ☆ 服务器端
 
@@ -317,30 +317,39 @@ import socket
 if __name__ == '__main__':
     # 1、创建服务器端套接字对象
     tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # 2、绑定IP地址与端口号
-    tcp_server_socket.bind(("", 8888))
-    # 3、开启监听
+    # 2、绑定IP地址与端口号 bind(('IP地址', 端口号))
+    tcp_server_socket.bind(("", 8888)) #如果是本机也可以不写，自动绑定（127.0.0.1）
+    # 3、开启监听 128:允许最大监听数
     tcp_server_socket.listen(128)
-    # 4、等待接收客户端连接请求
-    conn_socket, ip_port = tcp_server_socket.accept()
+    # 4、等待接收客户端连接请求 accept方法为阻塞，等待C端连接
+    new_socket, ip_port = tcp_server_socket.accept()
     print('客户端IP+端口：', ip_port)
     # 5、接收数据
-    recv_data = conn_socket.recv(1024)
+    recv_data = new_socket.recv(1024)
     print('接收到的数据：', recv_data.decode())
     # 6、发送数据
-    conn_socket.send("客户端的数据已经收到了".encode())
-    # 7、关闭套接字
-    conn_socket.close()
-    tcp_server_socket.close()
+    new_socket.send("客户端的数据已经收到了".encode())
+    # 7、关闭新套接字
+    new_socket.close()
+    #关闭服务器套接字
+    tcp_server_socket.close() 
 ```
+- 产生新的套接字对象
+  
+  原来的套接字对象只有服务器本身的信息，新的套接字对象不仅又服务器信息还有客户端信息
+![产生新的套接字对象](https://github.com/Legolas9999/PicUpload/assets/71768998/c70b45b6-e05c-46ce-83ad-6f8f3152e2ff)
 
-(==<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('10.1.1.10', 8888), raddr=('10.1.1.10', 48190)>==, <font color="red">('10.1.1.10', 48190)</font>)
+- accept方法返回元组 ( <一个新的scoket套接字对象>, (C端ip, C端端口) )
+
+(<socket.socket fd=4, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('10.1.1.10', 8888), raddr=('10.1.1.10', 48190)>,  <br>
+('10.1.1.10', 48190)
+)
 
 变量1，变量2 = (第一个元素值，第二个元素值)
 
 ## 4、TCP服务器端开发面向对象版本
 
-```powershell
+```python
 # 导入模块
 import socket
 
@@ -388,6 +397,7 @@ if __name__ == '__main__':
 ```
 
 ## 5、扩展：TCP服务器端开发之多客户端
+- 代码没有问题，但是 因为是`单进程`所以实际上还是只能接受一个客户端
 
 ```python
 # 导入模块
@@ -403,7 +413,7 @@ tcp_server_socket.listen(128)
 while True:
     # 使用try...except捕获连接异常
     try:
-        new_socket, ip_port = tcp_server_socket.accept()
+        new_socket, ip_port = tcp_server_socket.accept() # 阻塞！！！
         while True:
             try:
                 # 5、接收客户端发送过来的消息
@@ -439,7 +449,7 @@ import socket
 if __name__ == '__main__':
     # 1、创建服务器端套接字对象
     tcp_server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    # 设置端口复用
+    # 设置端口复用(让服务器端占用的端口在执行结束后立即释放，不影响后续程序使用)
     tcp_server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, True)
     # 2、绑定IP地址与端口号
     tcp_server_socket.bind(("", 8888))
