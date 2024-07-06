@@ -516,7 +516,7 @@ https://c.runoob.com/front-end/7625/#!flags=&re=1%5B3-9%5D%5Cd%7B9%7D
 
 ## 1、子表达式（又称之为分组）
 
-在正则表达式中，通过一对圆括号括起来的内容，我们就称之为=="子表达式"==。
+在正则表达式中，通过一对圆括号括起来的内容，我们就称之为=="`子表达式`"==。
 
 ```powershell
 re.search(r'\d(\d)(\d)', 'abcdef123ghijklmn')
@@ -532,25 +532,26 @@ re.search(r'\d(\d)(\d)', 'abcdef123ghijklmn')
 
 当正则表达式在字符串中匹配到相应的内容后，计算机系统会自动把子表达式所匹配的到内容放入到系统的对应缓存区中（缓存区从$1开始）
 
-![image-20210118194614636](media/image-20210118194614636-0970374.png)
+![image-20210118194614636](https://github.com/Legolas9999/PicUpload/assets/71768998/a118a586-d37e-417a-865d-4d1a1421fe05)
 
 案例演示：
 
 ```python
 import re
 
-
 # 匹配字符串中连续出现的两个相同的单词
+# 使用场景：只想要匹配到的内容的一部分
+# 分组的编号从1开始
 str1 = 'abcdef123ghijklmn'
 result = re.search(r'\d(\d)(\d)', str1)
-print(result.group())
-print(result.group(1))
-print(result.group(2))
+print(result.group())   # 匹配到的内容123
+print(result.group(1))  # 获取1号分组的内容
+print(result.group(2))  # 获取2号分组的内容
 ```
 
 ## 3、反向引用（后向引用）
 
-在正则表达式中，我们可以通过\n（n代表第n个缓存区的编号）来引用缓存区中的内容，我们把这个过程就称之为"反向引用"。
+在正则表达式中，我们可以通过\n（n代表第n个缓存区的编号）来引用缓存区(分组)中的内容，我们把这个过程就称之为"反向引用"。
 
 ① 连续4个数字
 
@@ -560,7 +561,9 @@ re.search(r'\d\d\d\d, str1)
 
 ② 连续的4个数字，但是数字的格式为1111、2222、3333、4444、5555效果？
 
- re.search(r'(\d)\1\1\1, str1)
+ re.search(r'(\d)\1\1\1, str1) # 连续引用3次1号分组匹配到的内容
+
+ - 注意：可能pattern前面要加上r，来取消转义
 
 ## 4、几个练习题
 
@@ -616,8 +619,8 @@ else:
 
 | 代码       | 功能                             |
 | ---------- | -------------------------------- |
-| (?P<name>) | 分组起别名                       |
-| (?P=name)  | 引用别名为name分组匹配到的字符串 |
+| `(?P<name>)` | 分组起别名                       |
+| `(?P=name)`  | 引用别名为name分组匹配到的字符串 |
 
 案例：匹配\<book>\</book>
 
@@ -654,7 +657,8 @@ else:
 import re
 
 email = '1478670@qq.com, go@126.com, heima123@163.com'
-result = re.finditer('\w+@(qq|126|163).com', email)
+# 需要对 . 进行转义，让它变为一个普通字符
+result = re.finditer('\w+@(qq|126|163)\.com', email)
 if result:
     for i in result:
         print(i.group())
@@ -668,6 +672,7 @@ else:
 import re
 
 str1 = 'qq:10567'
+# remok也有split方法，返回列表
 result = re.split(r':', str1)
 if result:
     print(f'{result[0]}号：{result[1]}')
@@ -679,3 +684,5 @@ else:
 
 ⑤需求：匹配出<html><h1>www.itcast.cn</h1></html>
 
+## 总结
+![](https://github.com/Legolas9999/PicUpload/assets/71768998/782478a5-7652-40ea-b6d7-d1c14ec4feeb)
