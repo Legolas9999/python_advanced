@@ -1,13 +1,24 @@
 import re
+import requests
 
-# 匹配字符串中连续出现的两个相同的单词
-# 使用场景：只想要匹配到的内容的一部分
-# 分组的编号从1开始
-str1 = 'abcdef1111ghij2222klm2222n'
-result = re.finditer(r'(\d)\1\1\1', str1)
-#print(result.group())   # 匹配到的内容123
-#print(result.group(1))  # 获取1号分组的内容
-#print(result.group(2))  # 获取2号分组的内容
+header = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0'}
+res = requests.get("https://missav.com/ja/sone-239-chinese-subtitle", headers=header)
 
-for i in result:
-    print(i.group())
+# html str
+res = res.content.decode("utf-8")
+
+pic_url = re.finditer('img src="(.*?)"',res)
+url_list = []
+if pic_url:
+    for i in pic_url:
+        url_list.append(i.group(1))
+
+
+num = 20
+for i in url_list:
+    res = requests.get(i)
+    res = res.content
+    with open(f'pic/{num}.jpg','wb') as f:
+        f.write(res)
+
+    num += 1

@@ -428,7 +428,7 @@ tcp_server_socket.close()
 
 ## 6、TCP网络应用程序开发注意点
 
-![image-20210114122609770](media/image-20210114122609770-0598369.png)
+![image-20210114122609770](https://github.com/Legolas9999/PicUpload/assets/71768998/763aa3f9-8c91-4e23-b575-cbf29e6c4d9a)
 
 端口复用：
 
