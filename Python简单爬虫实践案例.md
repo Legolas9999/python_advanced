@@ -604,13 +604,13 @@ if __name__ == '__main__':
 
 ## 1、 什么是数据可视化
 
-![image-20211128182320385](media/image-20211128182320385.png)
+![image-20211128182320385](https://github.com/Legolas9999/PicUpload/assets/71768998/5ccd5d9f-279b-4641-a92a-ea9096f0f098)
 
 **数据可视化**：顾名思义就是让数据看的到, 他的作用也很明显, 让人们不用再去阅读枯燥无味的数据, 一眼看去就可以明白数据是什么, 数据间的关系是什么, 更好的让我们通过数据发现潜在的规律进而进行商业决策。
 
 ## 2、pyecharts模块
 
-![image-20211128182348327](media/image-20211128182348327.png)
+![image-20211128182348327](https://github.com/Legolas9999/PicUpload/assets/71768998/81939e5d-d632-44b6-9e89-178bfe4c943c)
 
 **`概况`** :
 
@@ -887,7 +887,7 @@ logging.critical('这是一个critical级别的日志信息')
 
 **运行结果:**
 
-![image-20211128182717114](media/image-20211128182717114.png)
+![image-20211128182717114](https://github.com/Legolas9999/PicUpload/assets/71768998/67c1f7a1-222e-48cd-8ed4-3e824f84b009)
 
 ## 4、logging日志在Web项目中应用
 
@@ -950,7 +950,7 @@ logging.critical('这是一个critical级别的日志信息')
 
 **logging日志:**
 
-![image-20211128182624337](media/image-20211128182624337.png)
+![image-20211128182624337](https://github.com/Legolas9999/PicUpload/assets/71768998/597b71fa-65e8-47b6-a954-399339dc6710)
 
 > 通过日志信息我们得知, index.html被访问了2次, gdp.html被访问了2次.
 
