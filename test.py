@@ -1,24 +1,29 @@
+# 请编写一个正则表达式，用于匹配符合以下要求的手机号码：
+
+# 11位数字
+# 第一位为1
+# 第二位为3、4、5、6、7、8、9之一
+
 import re
-import requests
 
-header = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36 Edg/126.0.0.0'}
-res = requests.get("https://missav.com/ja/sone-239-chinese-subtitle", headers=header)
+def find_matches(words, pattern):
+    matches = []
+    for word in words:
+        if re.search(pattern, word):
+            matches.append(word)
+    return matches
 
-# html str
-res = res.content.decode("utf-8")
+# 示例字符串列表
+words = ['apple', 'banana', 'cat', 'dog', 'elephant', 'fish']
 
-pic_url = re.finditer('img src="(.*?)"',res)
-url_list = []
-if pic_url:
-    for i in pic_url:
-        url_list.append(i.group(1))
+# 需求1：搜索包含a或者e，并且后面跟了6个任意字符的元素
+pattern1 = r'[ae].{6}'
+matches1 = find_matches(words, pattern1)
+print("需求1匹配结果:", matches1)
+
+# 需求2：搜索以a或者e起始，后面跟了6个任意字符的元素
+pattern2 = r'^[ae].{6}'
+matches2 = find_matches(words, pattern2)
+print("需求2匹配结果:", matches2)
 
 
-num = 20
-for i in url_list:
-    res = requests.get(i)
-    res = res.content
-    with open(f'pic/{num}.jpg','wb') as f:
-        f.write(res)
-
-    num += 1

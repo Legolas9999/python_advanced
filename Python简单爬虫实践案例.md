@@ -974,3 +974,23 @@ logging.critical('这是一个critical级别的日志信息')
   3. logging.warning函数, 表示: 打印(记录)WARNING级别的日志信息
   4. logging.error函数, 表示: 打印(记录)ERROR级别的日志信息
   5. logging.critical函数, 表示: 打印(记录)CRITICAL级别的日志信息
+
+
+# 爬虫
+匹配多行数据时，可以这样写
+```python
+# <td><span class="number num100">100</span></td>
+# <td><a href="/hangye/qiche/pinpai/dc_196.html" title="Polestar极星" target="_blank">Polestar极星</a></td>
+# <td>117</td>
+# <td>747</td>
+# <td><a href="/hangye/qiche/dc_1618.html" title="Polestar 4" target="_blank">Polestar 4</a></td>
+
+pattern = (
+    r'<td><span class="number num\d+">(\d+)</span></td>\s*'
+    r'<td><a href="[^"]+" title="([^"]+)"[^>]*>[^<]+</a></td>\s*'
+    r"<td>(\d+)</td>\s*"
+    r"<td>(\d+)</td>\s*"
+    r'<td><a href="[^"]+" title="[^"]+"[^>]*>([^<]+)</a></td>'
+)
+
+```
